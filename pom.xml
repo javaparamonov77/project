@@ -6,19 +6,21 @@
 
   <groupId>ru.paramonov.project</groupId>
   <artifactId>project</artifactId>
-  <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>client</module>
+        <module>server</module>
+    </modules>
 
-  <name>project</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+    <name>project</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <lombok.version>1.18.20</lombok.version>
     <junit-jupiter.version>5.8.2</junit-jupiter.version>
-
   </properties>
 
   <dependencies>
