@@ -91,7 +91,7 @@ public class ATMServiceTest {
         }};
 
     }
-    
+
     @Test
     public void testPositiveGetBalance() throws PersonalIdentificatorNumberException {
         ATMService atmService =
