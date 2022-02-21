@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>PIN</title>
+</head>
+<body>
+<form id ="input-pin" th:action="@{/pin/validation}" method="post">
+    <div class="row">
+        <label>Введите пин-код</label>
+        <input th:value="${PIN}" name = "pin" required/>
+    </div>
+    <br/>
+    <div class="row">
+        <button type="submit">Проверить ПИН</button>
+    </div>
+</form>
+<br/>
+<form action="/" method="get">
+    <input type= "submit" value="Вернуться начальное в меню">
+</form>
+
+</body>
+</html>

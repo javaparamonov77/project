@@ -9,4 +9,6 @@ public interface Card {
     long getAccountNumber();
     int getPersonalIdentificationNumber();
     String getBankName();
+
+
 }

@@ -3,18 +3,26 @@ package ru.paramonov.project.server.common;
 import lombok.Getter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Accounts")
 @Getter
 public class Account {
-    private final long accountNumber;
-    private final BigDecimal balance;
-    private final Currency accountCurrency;
-    private final LocalDate creationDate;
+    @Id
+    @GeneratedValue
+    private long accountNumber;
+    private long clientId;
+    private BigDecimal balance;
+    private Currency accountCurrency;
+    private LocalDate creationDate;
 
-    public Account(long accountNumber, BigDecimal balance, Currency accountCurrency, LocalDate creationDate) {
-        this.accountNumber = accountNumber;
+    public Account(){}
+
+    public Account(long clientId, BigDecimal balance, Currency accountCurrency) {
+        this.clientId = clientId;
         this.balance = balance;
         this.accountCurrency = accountCurrency;
-        this.creationDate = creationDate;
+        creationDate = LocalDate.now();
     }
 }
