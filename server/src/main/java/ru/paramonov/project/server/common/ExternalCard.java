@@ -1,10 +1,8 @@
-package ru.paramonov.project.client.common;
-
-import ru.paramonov.project.server.common.Card;
+package ru.paramonov.project.server.common;
 
 //TODO: выходит за рамки MVP (для дальнейшей проработки)
 public class ExternalCard implements Card {
-    private final int cardNumber;
+    private final long cardNumber;
     private final int personalIdentificationNumber;
     private final long accountNumber;
 
@@ -20,7 +18,7 @@ public class ExternalCard implements Card {
     }
 
     @Override
-    public int getCardNumber()  {
+    public long getCardNumber()  {
         return cardNumber;
     }
 

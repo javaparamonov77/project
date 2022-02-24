@@ -10,10 +10,9 @@ import javax.persistence.Table;
 public class LocalCard implements Card {
     @Id
     @GeneratedValue
-    private int cardNumber;
+    private long cardNumber;
     private int personalIdentificationNumber;
     private long accountNumber;
-//    private final String bankName;
 
     public LocalCard(){}
     public LocalCard(long accountNumber /* String bankName*/) {
@@ -33,7 +32,7 @@ public class LocalCard implements Card {
     }
 
     @Override
-    public int getCardNumber() {
+    public long getCardNumber() {
         return cardNumber;
     }
 

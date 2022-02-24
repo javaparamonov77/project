@@ -12,8 +12,4 @@ public class NotFoundException extends RuntimeException {
     public NotFoundException(long id) {
         super("Account or Client with number " + id + " not found");
     }
-    //TODO: нужна ли стринговая реализация?
-    public NotFoundException(String name) {
-        super("Card with ID " + name + " not found");
-    }
 }

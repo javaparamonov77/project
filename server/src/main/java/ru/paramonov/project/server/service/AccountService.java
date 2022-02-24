@@ -2,62 +2,73 @@ package ru.paramonov.project.server.service;
 
 import org.springframework.stereotype.Service;
 import ru.paramonov.project.server.common.Account;
+import ru.paramonov.project.server.common.Card;
 import ru.paramonov.project.server.common.Currency;
-import ru.paramonov.project.server.exception.NotFoundException;
+import ru.paramonov.project.server.common.LocalCard;
 import ru.paramonov.project.server.repository.AccountRepository;
-
+import ru.paramonov.project.server.repository.LocalCardRepository;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class AccountService {
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
+    private final LocalCardRepository cardRepository;
 
-    /*
-    public Account getByAccountNumber(long accountNumber) {
-        Account account = accountRepository.findById(accountNumber);
-        if (account == null) {
-            throw new NotFoundException(accountNumber);
+    public AccountService(AccountRepository accountRepository, LocalCardRepository cardRepository) {
+        this.accountRepository = accountRepository;
+        this.cardRepository = cardRepository;
+    }
+
+    public Optional<Card> getCardByCardNumber(long cardNumber) {
+        return Optional.of(cardRepository.getOne(cardNumber));
+    }
+
+    public Optional<Account> getAccountByAccountNumber(long accountNumber) {
+        return Optional.of(accountRepository.getOne(accountNumber));
+    }
+
+    public boolean cardIsPresent(long cardNumber) {
+        return getCardByCardNumber(cardNumber).isPresent();
+    }
+
+    public boolean accountIsPresent(long accountNumber) {
+        return getAccountByAccountNumber(accountNumber).isPresent();
+    }
+
+    public Stream<Account> getAllAccounts() {
+        List<Account> list = accountRepository.findAll();
+        return list.stream();
+    }
+
+    public Stream<LocalCard> getAllCards() {
+        List<LocalCard> list = cardRepository.findAll();
+        return list.stream();
+    }
+
+    public Boolean doVerification(long cardNumber, long accountNumber, int pin) {
+        boolean result = false;
+        if (cardIsPresent(cardNumber) && accountIsPresent(accountNumber)) {
+            Card card = getCardByCardNumber(cardNumber).get();
+            if (card.getAccountNumber() == accountNumber) {
+                if (card.getPersonalIdentificationNumber() == pin) {
+                    result = true;
+                }
+            }
         }
-        return account;
+        return result;
     }
 
-    public Account getByClientId(long clientId) {
-        Account account = accountRepository.findById(clientId);
-        if (account == null) {
-            throw new NotFoundException(clientId);
+   public BigDecimal getBalance ( long accountId) {
+            Account account = getAccountByAccountNumber(accountId).get();
+            return account.getBalance();
         }
-        return account;
-    }
 
-    public Account createAccount(long clientId, long accountNumber, BigDecimal balance, Currency accountCurrency) {
-        Account accountCreate = new Account(clientId, balance, accountCurrency);
-        //TODO: нужен ли set??
-        //accountCreate.set
-        return accountRepository.save(accountCreate);
+    public Currency getAccountCurrency (long accountId) {
+        Account account = getAccountByAccountNumber(accountId).get();
+        return account.getAccountCurrency();
     }
-
-    public void deleteAccount(long accountNumber) {
-        if (!accountRepository.existsById(accountNumber)) {
-            throw new NotFoundException(accountNumber);
-//            Account deleteAccount = accountCrudRepository.findById(accountNumber);
-//            accountCrudRepository.delete(deleteAccount);
-        }
-    }
-
-    //TODO: доработать
-    public String updateAccount(long accountNumber, BigDecimal balance, Currency accountCurrency) {
-        if (!accountRepository.existsById(accountNumber)) {
-            throw new NotFoundException(accountNumber);
-
-            //TODO: нужен ли set??
-            //accountCreate.set
-//            Account accountCreate = new Account(clientId, accountNumber, balance, accountCurrency, LocalDate.now());
-//            return accountCrudRepository.save(accountCreate);
-        }
-        return "Account with Balance = " + balance + " was created!";
-    }
-*/
 }
-    //TODO: реализация
-//    public Card getByCardNumber(int cardNumber) {    };
 

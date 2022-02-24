@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.paramonov.project.server.common.LocalCard;
-import ru.paramonov.project.server.repository.CardRepository;
+import ru.paramonov.project.server.repository.LocalCardRepository;
 import java.util.List;
 
 @Controller
 @RequestMapping("/card_controller")
 public class ATMCardServerController {
-    public ATMCardServerController(CardRepository cardRepository){
+    public ATMCardServerController(LocalCardRepository cardRepository){
         this.cardRepository = cardRepository;
     }
-    private final CardRepository cardRepository;
+    private final LocalCardRepository cardRepository;
 
     @GetMapping("/add_cards")
     public String getAddCardPage() {

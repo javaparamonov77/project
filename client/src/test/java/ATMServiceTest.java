@@ -1,22 +1,14 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import ru.paramonov.project.server.common.Card;
-import ru.paramonov.project.client.service.ATMService;
 import ru.paramonov.project.server.common.LocalCard;
-import ru.paramonov.project.server.exception.PersonalIdentificatorNumberException;
 import ru.paramonov.project.server.repository.AccountRepository;
-import ru.paramonov.project.server.repository.CardRepository;
-
-import java.math.BigDecimal;
+import ru.paramonov.project.server.repository.LocalCardRepository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ATMServiceTest {
 
     AccountRepository accountRepository;
-    CardRepository cardRepository;
+    LocalCardRepository cardRepository;
 
 //    @BeforeEach
 //    void setUp() {
