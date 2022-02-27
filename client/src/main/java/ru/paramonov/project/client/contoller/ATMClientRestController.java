@@ -9,9 +9,9 @@ import java.util.Arrays;
 @RequestMapping(value = "/ATM")
 @RestController
 public class ATMClientRestController {
-    static final String URL_SERVER = "http://localhost:8082/API/balance";
-    ResponseEntity<String> response;
-    ATMResponse atmResponse;
+    private static final String URL_SERVER = "http://localhost:8082/API/balance";
+    private ResponseEntity<String> response;
+    private ATMResponse atmResponse;
 
     @GetMapping("/")
     public String getReady() {

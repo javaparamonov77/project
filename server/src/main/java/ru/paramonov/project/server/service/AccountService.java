@@ -30,12 +30,13 @@ public class AccountService {
         return Optional.of(accountRepository.getOne(accountNumber));
     }
 
+
     public boolean cardIsPresent(long cardNumber) {
-        return getCardByCardNumber(cardNumber).isPresent();
+        return cardRepository.existsById(cardNumber);
     }
 
     public boolean accountIsPresent(long accountNumber) {
-        return getAccountByAccountNumber(accountNumber).isPresent();
+        return accountRepository.existsById(accountNumber);
     }
 
     public Stream<Account> getAllAccounts() {
@@ -48,7 +49,7 @@ public class AccountService {
         return list.stream();
     }
 
-    public Boolean doVerification(long cardNumber, long accountNumber, int pin) {
+    public boolean doVerificationPIN(long cardNumber, long accountNumber, int pin) {
         boolean result = false;
         if (cardIsPresent(cardNumber) && accountIsPresent(accountNumber)) {
             Card card = getCardByCardNumber(cardNumber).get();
@@ -60,6 +61,11 @@ public class AccountService {
         }
         return result;
     }
+
+    public boolean isExistsDataDB (long cardNumber, long accountNumber) {
+        return cardIsPresent(cardNumber) && accountIsPresent(accountNumber);
+    }
+
 
    public BigDecimal getBalance ( long accountId) {
             Account account = getAccountByAccountNumber(accountId).get();
