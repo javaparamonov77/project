@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.w3.org/1999/xhtml"
+      xmlns:sec="www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cards</title>
+    <link rel="stylesheet" type="text/css" href="/static/style/style.css" th:href="@{/style/style.css}">
+    <link rel="stylesheet" type="text/css"  href="/static/style/table_style.css" th:href="@{/style/table_style.css}">
+</head>
+<body>
+<h2>Перечень карт, доступных в БД</h2>
+<br/>
+<br/>
+<table>
+    <thead>
+    <tr>
+    <th>card_number</th>
+    <th>pin</th>
+    <th>account_number</th>
+    </tr>
+    </thead>
+    <tbody th:each="card : ${cards}">
+    <tr>
+        <td th:text="${card.getCardNumber()}"></td>
+        <td th:text="${card.getPersonalIdentificationNumber()}"></td>
+        <td th:text="${card.getAccountNumber()}"></td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<br/>
+<div sec:authorize="hasRole('ADMIN')">
+<form action="/card_controller/add_cards" method="get">
+    <input type="submit" value="Добавить карту к существующему счету">
+</form>
+</div>
+<br/>
+<div sec:authorize="isAuthenticated()">
+    <a href="../logout"> Logout</a>
+</div>
+</body>
+</html>

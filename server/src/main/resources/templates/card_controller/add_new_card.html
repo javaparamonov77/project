@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new card</title>
+    <link rel="stylesheet" type="text/css" href="/static/style/style.css" th:href="@{/style/style.css}"></head>
+<body>
+<h3>Добавление новой карты</h3>
+<br/>
+<form id="add-form" th:action = "@{/card_controller/cards}" th:method="post">
+    <div class="row">
+        <label>Введите аккаунт к которому будет привязана карта</label>
+        <input th:value="${card}" name="card" required/>
+    </div>
+    <br/>
+    <div class="row">
+        <button type="submit">Добавить новую карту</button>
+    </div>
+</form>
+</body>
+</html>

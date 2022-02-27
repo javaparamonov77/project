@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new account</title>
+    <link rel="stylesheet" type="text/css" href="/static/style/style.css" th:href="@{/style/style.css}"></head>
+<body>
+<h3>Добавление нового счета</h3>
+<br/>
+<form id="add-form" th:action = "@{/account_controller/accounts}" th:method="post">
+    <div class="row">
+        <label>Введите ID клиента: </label>
+        <input th:value="${clientId}" name="clientId" required/>
+    </div>
+    <br/>
+    <div class="row">
+        <label>Введите сумму баланса: </label>
+        <input th:value="${balance}" name="balance" required/>
+    </div>
+    <br/>
+    <div class="row">
+        <label>Введите валюту счета: </label>
+        <input th:value="${accountCurrency}" name="accountCurrency" required/>
+    </div>
+    <br/>
+    <div class="row">
+        <button type="submit">Добавить новый счет</button>
+    </div>
+</form>
+</body>
+</html>
