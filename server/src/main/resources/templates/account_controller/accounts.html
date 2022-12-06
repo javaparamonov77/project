@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.w3.org/1999/xhtml"
+      xmlns:sec="www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Accounts</title>
+    <link rel="stylesheet" type="text/css" href="/static/style/style.css" th:href="@{/style/style.css}">
+    <link rel="stylesheet" type="text/css"  href="/static/style/table_style.css" th:href="@{/style/table_style.css}">
+</head>
+<body>
+<h2>Перечень счетов, доступных в БД</h2>
+<br/>
+<br/>
+<table>
+    <thead>
+    <tr>
+        <th>account_number</th>
+        <th>сlient_id</th>
+        <th>balance</th>
+        <th>account_currency</th>
+        <th>date_of_creation</th>
+    </tr>
+    </thead>
+    <tbody th:each="account : ${accounts}">
+    <tr>
+        <td th:text="${account.getAccountNumber()}"></td>
+        <td th:text="${account.getClientId()}"></td>
+        <td th:text="${account.getBalance()}"></td>
+        <td th:text="${account.getAccountCurrency()}"></td>
+        <td th:text="${account.getCreationDate()}"></td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<br/>
+<div sec:authorize="hasRole('ADMIN')">
+    <form action="/account_controller/add_account" method="get">
+        <input type="submit" value="Создать новый счет">
+    </form>
+</div>
+<br/>
+<div sec:authorize="isAuthenticated()">
+    <a href="../logout"> Logout</a>
+</div>
+</body>
+</html>
